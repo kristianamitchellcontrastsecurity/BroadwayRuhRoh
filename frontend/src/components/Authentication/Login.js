@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { Button, Input, Divider, Segment, List, Grid } from "semantic-ui-react";
 
 export default class Login extends Component {
-  constructor() {
-    super();
-  }
-
 
   render() {
     return(
