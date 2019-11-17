@@ -14,14 +14,22 @@ import (
 	"gopkg.in/natefinch/lumberjack.v2"
 )
 
+func addRestaurant(w http.ResponseWriter, r *http.Request) {
+
+	log.Printf("Received request for %s\n", view)
+	w.Write([]byte(fmt.Sprintf("Hello, %s\n", view)))
+}
+
+func viewRestaurant(w http.ResponseWriter, r *http.Request) {
+
+	log.Printf("Received request for %s\n", view)
+	w.Write([]byte(fmt.Sprintf("Hello, %s\n", view)))
+}
+
 func handler(w http.ResponseWriter, r *http.Request) {
-	query := r.URL.Query()
-	name := query.Get("name")
-	if name == "" {
-		name = "Guest"
-	}
-	log.Printf("Received request for %s\n", name)
-	w.Write([]byte(fmt.Sprintf("Hello, %s\n", name)))
+
+	log.Printf("Received request for %s\n", view)
+	w.Write([]byte(fmt.Sprintf("Hello, %s\n", view)))
 }
 
 func main() {
@@ -29,6 +37,10 @@ func main() {
 	r := mux.NewRouter()
 
 	r.HandleFunc("/", handler)
+
+	r.HandleFunc("/addRestaurant", addRestaurant).Methods("POST");
+
+	r.HandleFunc("/viewRestaurant", viewRestaurant).Methods("GET");
 
 	srv := &http.Server{
 		Handler:      r,
